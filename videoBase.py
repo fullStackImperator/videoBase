@@ -119,6 +119,16 @@ app.layout = html.Div([
 
     html.Div(id='datatable-to-video')
 
+    dash_player.DashPlayer(
+        id = 'video-replay',
+        url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
+        # url=str("/" + df.at[active_row_id, 'Link']),
+        # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
+        controls=True,
+        width='100%'
+    ),
+
+
 ])
 
 
