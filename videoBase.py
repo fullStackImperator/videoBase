@@ -117,7 +117,7 @@ app.layout = html.Div([
     dcc.Store(id="store", data=0),
     dcc.Interval(id='interval', interval=1000),
 
-    html.Div(id='datatable-to-video')
+    html.Div(id='datatable-to-video'),
 
     dash_player.DashPlayer(
         id = 'video-replay',
