@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Raleway");
+@import url('https://fonts.googleapis.com/css?family=Cabin&display=swap');
+
+'Cabin',sans-serif
+
+/* Remove Undo
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+._dash-undo-redo {
+  display: none;
+}
+
+body {
+  margin: 0 !important;
+  color: #606060 !important;
+  /*font-family: "Raleway", sans-serif;*/
+  font-family: 'Cabin', sans-serif;
+  background-color: #f9f9f9 !important;
+}
+
+
+.app__container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#content-container {
+  margin: 5px;
+}
+
+#dropdown-row, #button-row {
+  margin: 5px;
+}
+
+#form-offense {
+  margin: 5px;
+}
+
+
+#name-col-1, #name-col-2, #name-col-3, #name-col-4, #name-col-5, #name-col-6 {
+  text-align: center;
+  padding: 5px 0;
+}
+
+#bar {
+  background-color: #000;
+  height: 5px;
+}
+
+.header__text {
+    font-family: sans-serif;
+    font-size: 20px;
+    /*color: #505050;*/
+    color: #c2c2c2;
+    margin-right: 20px;
+    letter-spacing: 0.23rem;
+}
+
+.app__logo {
+    height: 50px;
+    margin-left: 10px;
+}
+
+.app__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    margin-bottom: 25px;
+    box-shadow: 5px 10px #888888;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#left-side-column-up {
+  /*height: 500px;*/
+  /*position: absolute;  because its half court*/
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+/*  height: calc(100vh - 5px);*/
+  background-color: #f2f2f2;
+  overflow-y: scroll;
+  margin-left: 0px;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 1rem;
+}
+
+#left-side-column-down {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /*height: calc(100vh - 5px);*/
+  background-color: #f2f2f2;
+  overflow-y: scroll;
+  margin-left: 0px;
+  justify-content: flex-start;
+  /*align-items: center;*/
+  padding: 1rem 1rem;
+}
+
+#right-side-column-up {
+  /*height: 500px;*/
+/*  height: calc(100vh - 5px);*/
+  /*position: absolute;*/
+  overflow-y: scroll;
+  margin-left: 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+#right-side-column-down {
+/*  height: calc(100vh - 5px);*/
+  overflow-y: scroll;
+  margin-left: 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+#wrapper-top {
+    position: relative;
+    overflow: auto;
+    height: 400px;
+    /*calc(100vh - 5px);*/
+}
+
+s
+
+label {
+  /*border: 1px solid #fff;*/
+  padding: 10px;
+  display: block;
+  position: relative;
+  margin: 10px;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+
+h4 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+
+
+
+
+
+
+.video-outer-container {
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  min-width: 500px;
+}
+
+.video-container {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+}
+
+.video-container > div, .video-container > div > div {
+  position: absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+}
+
+.control-section {
+  width: 85%;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 5px;
+  flex-shrink: 0;
+  margin-bottom: 2%;
+}
+
+.control-element {
+  font-size: 15px;
+  padding: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.control-element > div:nth-child(1) {
+  width: 45%;
+}
+
+.control-element > div:nth-child(2) {
+  width: 60%;
+}
