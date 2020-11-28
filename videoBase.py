@@ -121,7 +121,7 @@ app.layout = html.Div([
 
     dash_player.DashPlayer(
         id = 'video-replay',
-        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4'
+        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4',
 
         #1on1_on_Ball_Pinciples.mp4',
         #url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
