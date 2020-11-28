@@ -109,7 +109,7 @@ app.layout = html.Div([
     dcc.Interval(id='interval_pg', interval=86400000*7, n_intervals=0),  # activated once/week or when page refreshed
     html.Div(id='postgres_datatable'),
 
-    # html.Button('Add Row', id='editing-rows-button', n_clicks=0),
+    html.Button('Add Row', id='editing-rows-button', n_clicks=0),
     html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
 
     # Create notification when saving to excel
@@ -268,7 +268,8 @@ def update_video(row_ids, selected_row_ids, active_cell):
                     html.Div(
                         dash_player.DashPlayer(
                             id = 'video-replay',
-                            url=str("/" + df.at[active_row_id, 'Link']),
+                            url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
+                            # url=str("/" + df.at[active_row_id, 'Link']),
                             # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
                             controls=True,
                             width='100%'
