@@ -39,13 +39,13 @@ app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, exte
 app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
+# VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
 
-# Authentication
-auth = dash_auth.BasicAuth(
-    app,
-    VALID_USERNAME_PASSWORD_PAIRS
-)
+# # Authentication
+# auth = dash_auth.BasicAuth(
+#     app,
+#     VALID_USERNAME_PASSWORD_PAIRS
+# )
 
 
 
@@ -151,6 +151,7 @@ app.layout = html.Div([
 # --------------------------------------------------------------------------
 
 
+# return datatable
 @app.callback(Output('postgres_datatable', 'children'),
               [Input('interval_pg', 'n_intervals')])
 def populate_datatable(n_intervals):
@@ -193,6 +194,60 @@ def populate_datatable(n_intervals):
     ]
 
 
+
+
+
+# populate datatable-to-video on click on row
+@app.callback(
+    Output('datatable-to-video', 'children'),
+    [Input('our-table', 'derived_virtual_row_ids'),
+     Input('our-table', 'selected_row_ids'),
+     Input('our-table', 'active_cell')])
+def update_video(row_ids, selected_row_ids, active_cell):
+    selected_id_set = set(selected_row_ids or [])
+    if row_ids is None:
+        dff = df
+        # pandas Series works enough like a list for this to be OK
+        row_ids = df['Id']
+    else:
+        dff = df.loc[row_ids]
+
+    active_row_id = active_cell['row_id'] if active_cell else None
+
+    print("#-#-#-#-#-#-#-#-#-#-#-#-")
+    print(active_row_id)
+    print("#-#-#-#-#-#-#-#-#-#-#-#-")
+
+
+    colors = ['#FF69B4' if id == active_row_id
+              else '#7FDBFF' if id in selected_id_set
+              else '#0074D9'
+              for id in row_ids]
+
+    if active_row_id:
+        return [
+            dbc.Row(
+                dbc.Col(
+                    html.Div(
+                        dash_player.DashPlayer(
+                            id = 'video-replay',
+                            url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/1on1_on_Ball_Pinciples.mp4',
+                            # url=str("/" + df.at[active_row_id, 'Link']),
+                            # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
+                            controls=True,
+                            width='100%'
+                        ),
+                    ),
+                width={"size": 10, "offset": 1},
+                ),
+            ),
+        ]
+    else:
+        pass
+
+
+
+# add column
 @app.callback(
     Output('our-table', 'columns'),
     [Input('adding-columns-button', 'n_clicks')],
@@ -208,6 +263,7 @@ def add_columns(n_clicks, value, existing_columns):
     return existing_columns
 
 
+# add row
 @app.callback(
     Output('our-table', 'data'),
     [Input('editing-rows-button', 'n_clicks')],
@@ -220,22 +276,7 @@ def add_row(n_clicks, rows, columns):
     return rows
 
 
-# @app.callback(
-#     Output('my_graph', 'figure'),
-#     [Input('our-table', 'data')],
-#     prevent_initial_call=True)
-# def display_graph(data):
-#     # df_fig = pd.DataFrame(data)
-#     # fig = px.bar(df_fig, x='Phone', y='Sales')
-
-#     pg_filtered = db.session.query(Product.Phone, Product.Sales)
-#     phone_c = [x.Phone for x in pg_filtered]
-#     sales_c = [x.Sales for x in pg_filtered]
-#     fig = go.Figure([go.Bar(x=phone_c, y=sales_c)])
-
-#     return fig
-
-
+# saved to database msg
 @app.callback(
     [Output('placeholder', 'children'),
      Output("store", "data")],
@@ -264,51 +305,6 @@ def df_to_csv(n_clicks, n_intervals, dataset, s):
             return no_output, s
     elif s == 0:
         return no_output, s
-
-
-
-@app.callback(
-    Output('datatable-to-video', 'children'),
-    [Input('datatable-row-ids', 'derived_virtual_row_ids'),
-     Input('datatable-row-ids', 'selected_row_ids'),
-     Input('datatable-row-ids', 'active_cell')])
-def update_video(row_ids, selected_row_ids, active_cell):
-    selected_id_set = set(selected_row_ids or [])
-    if row_ids is None:
-        dff = df
-        # pandas Series works enough like a list for this to be OK
-        row_ids = df['Id']
-    else:
-        dff = df.loc[row_ids]
-
-    active_row_id = active_cell['row_id'] if active_cell else None
-
-    colors = ['#FF69B4' if id == active_row_id
-              else '#7FDBFF' if id in selected_id_set
-              else '#0074D9'
-              for id in row_ids]
-
-    if active_row_id:
-        return [
-            dbc.Row(
-                dbc.Col(
-                    html.Div(
-                        dash_player.DashPlayer(
-                            id = 'video-replay',
-                            url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/1on1_on_Ball_Pinciples.mp4',
-                            # url=str("/" + df.at[active_row_id, 'Link']),
-                            # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
-                            controls=True,
-                            width='100%'
-                        ),
-                    ),
-                width={"size": 10, "offset": 1},
-                ),
-            ),
-        ]
-    else:
-        pass
-
 
 
 
