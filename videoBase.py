@@ -19,9 +19,26 @@ import plotly.graph_objects as go
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
+import boto3
 
 from boto.s3.connection import S3Connection
-s3 = S3Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
+# s3 = S3Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
+
+s3 = boto3.resource(
+    service_name='s3',
+    region_name='eu-central-1',
+    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
+)
+
+# Print out bucket names
+for bucket in s3.buckets.all():
+    print(bucket.name)
+
+for obj in s3.Bucket('drillslibrary-store').objects.all():
+    print(obj)
+
+s3_video = s3.Bucket('drillslibrary-store').Object('Drill.mp4').get()
 
 
 # app requires "pip install psycopg2" as well
@@ -126,7 +143,7 @@ app.layout = html.Div([
 
     dash_player.DashPlayer(
         id = 'video-replay',
-        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4',
+        url=s3_video, #'https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4',
 
         #1on1_on_Ball_Pinciples.mp4',
         #url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
