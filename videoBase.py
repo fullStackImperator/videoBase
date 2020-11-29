@@ -5,6 +5,7 @@ import dash_table
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_auth
 
 import datetime
 import sys
@@ -19,29 +20,15 @@ import plotly.graph_objects as go
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
-import boto3
+# app requires "pip install psycopg2" as well
 
-from boto.s3.connection import S3Connection
-# s3 = S3Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
-
-s3 = boto3.resource(
-    service_name='s3',
-    region_name='eu-central-1',
-    aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-    aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'],
+# Authentication
+auth = dash_auth.BasicAuth(
+    app,
+    {'5_star_coaching': 'good2great'}
 )
 
-# Print out bucket names
-for bucket in s3.buckets.all():
-    print(bucket.name)
 
-for obj in s3.Bucket('drillslibrary-store').objects.all():
-    print(obj)
-
-# s3_video = s3.Bucket('drillslibrary-store').Object('Drill.mp4').get()
-
-
-# app requires "pip install psycopg2" as well
 
 # format logos and pics
 image_filename1 = 'assets/hh_logo.png'
