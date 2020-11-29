@@ -38,7 +38,7 @@ for bucket in s3.buckets.all():
 for obj in s3.Bucket('drillslibrary-store').objects.all():
     print(obj)
 
-s3_video = s3.Bucket('drillslibrary-store').Object('Drill.mp4').get()
+# s3_video = s3.Bucket('drillslibrary-store').Object('Drill.mp4').get()
 
 
 # app requires "pip install psycopg2" as well
