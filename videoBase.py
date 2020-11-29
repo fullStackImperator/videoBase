@@ -277,7 +277,7 @@ def update_video(row_ids, selected_row_ids, active_cell):
     if row_ids is None:
         dff = df
         # pandas Series works enough like a list for this to be OK
-        row_ids = df['id']
+        row_ids = df['Id']
     else:
         dff = df.loc[row_ids]
 
