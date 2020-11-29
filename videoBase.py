@@ -39,13 +39,13 @@ app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, exte
 app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-# VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
+VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
 
-# # Authentication
-# auth = dash_auth.BasicAuth(
-#     app,
-#     VALID_USERNAME_PASSWORD_PAIRS
-# )
+# Authentication
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
 
 
 
