@@ -274,12 +274,12 @@ def df_to_csv(n_clicks, n_intervals, dataset, s):
      Input('datatable-row-ids', 'active_cell')])
 def update_video(row_ids, selected_row_ids, active_cell):
     selected_id_set = set(selected_row_ids or [])
-    # if row_ids is None:
-    #     dff = df
-    #     # pandas Series works enough like a list for this to be OK
-    #     row_ids = df['id']
-    # else:
-    #     dff = df.loc[row_ids]
+    if row_ids is None:
+        dff = df
+        # pandas Series works enough like a list for this to be OK
+        row_ids = df['id']
+    else:
+        dff = df.loc[row_ids]
 
     active_row_id = active_cell['row_id'] if active_cell else None
 
