@@ -19,6 +19,11 @@ import plotly.graph_objects as go
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 
+
+from boto.s3.connection import S3Connection
+s3 = S3Connection(os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'])
+
+
 # app requires "pip install psycopg2" as well
 
 # format logos and pics
