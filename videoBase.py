@@ -161,7 +161,8 @@ def populate_datatable(n_intervals):
             row_deletable=True,
             filter_action="native",
             sort_action="native",  # give user capability to sort columns
-            sort_mode="single",  # sort across 'multi' or 'single' columns
+            sort_mode="multi",  # sort across 'multi' or 'single' columns
+            selected_rows=[],
             page_action='native',
             page_current= 0,
             page_size= 10,
