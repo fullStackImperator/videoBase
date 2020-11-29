@@ -57,6 +57,9 @@ app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://aqneikqjreopov:85d086
 
 db = SQLAlchemy(app.server)
 
+df = pd.read_sql_table('records', con=db.engine)
+df['id'] = df['Id']
+df.set_index('id', inplace=True, drop=False)
 
 # class Product(db.Model):
 #     __tablename__ = 'records'
@@ -134,7 +137,7 @@ app.layout = html.Div([
 
     dash_player.DashPlayer(
         id = 'video-replay',
-        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4',
+        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/best.mp4',
 
         #1on1_on_Ball_Pinciples.mp4',
         #url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
@@ -155,7 +158,7 @@ app.layout = html.Div([
 @app.callback(Output('postgres_datatable', 'children'),
               [Input('interval_pg', 'n_intervals')])
 def populate_datatable(n_intervals):
-    df = pd.read_sql_table('records', con=db.engine)
+    # df = pd.read_sql_table('records', con=db.engine)
     return [
         dash_table.DataTable(
             id='our-table',
@@ -208,7 +211,7 @@ def update_video(row_ids, selected_row_ids, active_cell):
     if row_ids is None:
         dff = df
         # pandas Series works enough like a list for this to be OK
-        row_ids = df['Id']
+        row_ids = df['id']
     else:
         dff = df.loc[row_ids]
 
