@@ -22,10 +22,12 @@ from flask import Flask
 
 # app requires "pip install psycopg2" as well
 
+VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
+
 # Authentication
 auth = dash_auth.BasicAuth(
     app,
-    {'5_star_coaching': 'good2great'}
+    VALID_USERNAME_PASSWORD_PAIRS
 )
 
 
