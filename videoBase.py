@@ -22,15 +22,6 @@ from flask import Flask
 
 # app requires "pip install psycopg2" as well
 
-VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
-
-# Authentication
-auth = dash_auth.BasicAuth(
-    app,
-    VALID_USERNAME_PASSWORD_PAIRS
-)
-
-
 
 # format logos and pics
 image_filename1 = 'assets/hh_logo.png'
@@ -46,6 +37,17 @@ external_stylesheets = [dbc.themes.BOOTSTRAP]
 server = Flask(__name__)
 app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, external_stylesheets=external_stylesheets)
 app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
+
+# Authentication
+auth = dash_auth.BasicAuth(
+    app,
+    VALID_USERNAME_PASSWORD_PAIRS
+)
+
+
 
 # for your home PostgreSQL test table
 # app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:Stanford@localhost/videoBase"
