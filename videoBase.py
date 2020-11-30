@@ -106,14 +106,6 @@ app.layout = html.Div([
                     ),
                     href="/",
                 ),
-                # dbc.NavbarToggler(id="navbar-toggler2"),
-                # dbc.Collapse(
-                #     dbc.Nav(
-                #         [nav_item_1, nav_item_2], className="ml-auto", navbar=True
-                #     ),
-                #     id="navbar-collapse2",
-                #     navbar=True,
-                # ),
             ]
         ),
         color="black",
@@ -132,30 +124,32 @@ app.layout = html.Div([
     #     html.Button('Add Column', id='adding-columns-button', n_clicks=0)
     # ], style={'height': 50}),
 
+    # html.Button('Add Row', id='editing-rows-button', n_clicks=0),
+    html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
+
     dcc.Interval(id='interval_pg', interval=86400000*7, n_intervals=0),  # activated once/week or when page refreshed
     html.Div(id='postgres_datatable'),
 
-    html.Button('Add Row', id='editing-rows-button', n_clicks=0),
-    html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
 
-    # Create notification when saving to excel
+
+    # Create notification when saving to excel/database
     html.Div(id='placeholder', children=[]),
     dcc.Store(id="store", data=0),
     dcc.Interval(id='interval', interval=1000),
 
     html.Div(id='datatable-to-video'),
 
-    dash_player.DashPlayer(
-        id = 'video-replay',
-        url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/best.mp4',
+    # dash_player.DashPlayer(
+    #     id = 'video-replay',
+    #     url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/best.mp4',
 
-        #1on1_on_Ball_Pinciples.mp4',
-        #url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
-        # url=str("/" + df.at[active_row_id, 'Link']),
-        # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
-        controls=True,
-        width='100%'
-    ),
+    #     #1on1_on_Ball_Pinciples.mp4',
+    #     #url='http://s3.amazonaws.com/drillslibrary-store/1on1_on_Ball_Pinciples.mp4',
+    #     # url=str("/" + df.at[active_row_id, 'Link']),
+    #     # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
+    #     controls=True,
+    #     width='100%'
+    # ),
 
 
 ])
@@ -172,13 +166,14 @@ def populate_datatable(n_intervals):
     return [
         dash_table.DataTable(
             id='our-table',
-            columns=[{
-                         'name': str(x),
-                         'id': str(x),
-                         'deletable': False,
-                         'presentation': 'dropdown',
-                     } if x in ['Focus', 'Audience', 'Fundamental', 'DefenseLevel', 'Emphasis', 'Offense', 'Defense', 'Position']
-                     else {
+            columns=[
+            {
+                'name': str(x),
+                'id': str(x),
+                'deletable': False,
+                'presentation': 'dropdown',
+            } if x in ['Focus', 'Audience', 'Fundamental', 'DefenseLevel', 'Emphasis', 'Offense', 'Defense', 'Position']
+            else {
                 'name': str(x),
                 'id': str(x),
                 'deletable': False,
@@ -295,8 +290,8 @@ def update_video(row_ids, selected_row_ids, active_cell):
                     html.Div(
                         dash_player.DashPlayer(
                             id = 'video-replay',
-                            url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/5on5_Zipper_into_Transition.mp4',
-                            # url=str("/" + df.at[active_row_id, 'Link']),
+                            #url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/5on5_Zipper_into_Transition.mp4',
+                            url=str("http://s3.amazonaws.com/drillslibrary-store/" + df.at[active_row_id, 'Name']),
                             # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
                             controls=True,
                             width='100%'
