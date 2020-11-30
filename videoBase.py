@@ -295,7 +295,7 @@ def update_video(row_ids, selected_row_ids, active_cell):
                     html.Div(
                         dash_player.DashPlayer(
                             id = 'video-replay',
-                            url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/Drill.mp4',
+                            url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/5on5_Zipper_into_Transition.mp4',
                             # url=str("/" + df.at[active_row_id, 'Link']),
                             # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
                             controls=True,
