@@ -17,6 +17,9 @@ body {
   background-color: #f9f9f9 !important;
 }
 
+.Select-menu-outer {
+display : block !important;
+}
 
 .app__container {
   margin-left: 10px;

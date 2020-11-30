@@ -12,6 +12,7 @@ import sys
 import os
 import glob
 import base64
+from collections import OrderedDict
 
 import pandas as pd
 import plotly.express as px
@@ -74,6 +75,17 @@ df.set_index('id', inplace=True, drop=False)
 #         self.Version = version
 #         self.Price = price
 #         self.Sales = sales
+
+
+focus = ['Competition', 'Concepts', 'Skills', 'Decision', 'Sets']
+audience = ['Individual', 'Group', 'Combo']
+fundamental = ['Passing', 'Shooting', 'Dribling', 'Finishing']
+defenseLevel = ['No Defense', 'Guide Defense', 'Contact Defense']
+emphasis = ['Create Advantage', 'Finishing Advantage', 'Using Advantage']
+offense = ['BOB', 'SOB', 'Drive&Kick-Dish', 'Close Out', 'Fastbreak', 'Transition', 'Top PnR', 'Side PnR', 'Step Up PnR', 'Coming Off Screen', 'Post Up', 'Numbers', 'Zone Offense', 'Press Break']
+defense = ['Close Out', 'Rebound', 'Transition', 'Coming Off Screen', 'Post Up', 'Press Defense', 'Zone Defense', 'Rebounding']
+position = ['Guards', 'Bigs', 'Combo', 'Team']
+
 
 
 # ------------------------------------------------------------------------------------------------
@@ -165,14 +177,65 @@ def populate_datatable(n_intervals):
             columns=[{
                          'name': str(x),
                          'id': str(x),
-                         # 'deletable': False,}
-                #      } if x == 'Sales' or x == 'Phone'
-                #      else {
-                # 'name': str(x),
-                # 'id': str(x),
-                # 'deletable': True,
+                         'deletable': False,
+                         'presentation': 'dropdown',
+                     } if x in ['Focus', 'Audience', 'Fundamental', 'DefenseLevel', 'Emphasis', 'Offense', 'Defense', 'Position']
+                     else {
+                'name': str(x),
+                'id': str(x),
+                'deletable': False,
             }
-                     for x in df.columns],
+            for x in df.columns],
+            dropdown={
+                'Focus': {
+                    'options': [
+                        {'label': i, 'value': i}
+                        for i in ['Competition', 'Concepts', 'Skills', 'Decision', 'Sets']
+                    ]
+                },
+                'Audience': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in audience
+                    ]
+                },
+                'Fundamental': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in fundamental
+                    ]
+                },
+                'DefenseLevel': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in defenseLevel
+                    ]
+                },
+                'Emphasis': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in emphasis
+                    ]
+                },
+                'Offense': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in offense
+                    ]
+                },
+                'Defense': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in defense
+                    ]
+                },
+                'Position': {
+                     'options': [
+                        {'label': i, 'value': i}
+                        for i in position
+                    ]
+                },
+            },
             data=df.to_dict('records'),
             editable=True,
             row_deletable=True,
