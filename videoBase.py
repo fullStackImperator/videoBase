@@ -138,6 +138,8 @@ app.layout = html.Div([
     dcc.Interval(id='interval', interval=1000),
 
     html.Br(),
+    html.Br(),
+    html.Br(),
 
 
     html.Div(id='datatable-to-video'),
