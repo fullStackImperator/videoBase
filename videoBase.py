@@ -12,7 +12,6 @@ import sys
 import os
 import glob
 import base64
-from collections import OrderedDict
 
 import pandas as pd
 import plotly.express as px
