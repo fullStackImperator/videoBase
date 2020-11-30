@@ -137,6 +137,9 @@ app.layout = html.Div([
     dcc.Store(id="store", data=0),
     dcc.Interval(id='interval', interval=1000),
 
+    html.Br(),
+
+
     html.Div(id='datatable-to-video'),
 
     # dash_player.DashPlayer(
@@ -291,8 +294,7 @@ def update_video(row_ids, selected_row_ids, active_cell):
                         dash_player.DashPlayer(
                             id = 'video-replay',
                             #url='https://drillslibrary-store.s3.eu-central-1.amazonaws.com/5on5_Zipper_into_Transition.mp4',
-                            url=str("http://s3.amazonaws.com/drillslibrary-store/" + df.at[active_row_id, 'Name']),
-                            # url=str('http://s3.amazonaws.com/bucketname/' + df.at[active_row_id, 'Link']),
+                            url=str("https://drillslibrary-store.s3.eu-central-1.amazonaws.com/" + df.at[active_row_id, 'Name']),
                             controls=True,
                             width='100%'
                         ),
