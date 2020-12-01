@@ -126,7 +126,7 @@ app.layout = html.Div([
     # ], style={'height': 50}),
 
     # html.Button('Add Row', id='editing-rows-button', n_clicks=0),
-    html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
+    # html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
 
     dcc.Interval(id='interval_pg', interval=86400000*7, n_intervals=0),  # activated once/week or when page refreshed
     html.Div(id='postgres_datatable'),
@@ -168,7 +168,7 @@ app.layout = html.Div([
 @app.callback(Output('postgres_datatable', 'children'),
               [Input('interval_pg', 'n_intervals')])
 def populate_datatable(n_intervals):
-    # df = pd.read_sql_table('records', con=db.engine)
+    df = pd.read_sql_table('records', con=db.engine)
     return [
         dash_table.DataTable(
             id='our-table',
