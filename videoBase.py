@@ -129,6 +129,10 @@ app.layout = html.Div([
     html.Button('Save to Database', id='save_to_postgres', n_clicks=0),
 
     dcc.Interval(id='interval_pg', interval=86400000*7, n_intervals=0),  # activated once/week or when page refreshed
+
+    html.Br(),
+    html.Br(),
+
     html.Div(id='postgres_datatable'),
 
 
@@ -246,14 +250,23 @@ def populate_datatable(n_intervals):
             page_current= 0,
             page_size= 10,
             # page_action='none',  # render all of the data at once. No paging.
-            style_table={'height': '300px', 'overflowY': 'auto'},
-            style_cell={'textAlign': 'left', 'minWidth': '100px', 'width': '100px', 'maxWidth': '100px'},
+            style_table={'height': '350px', 'overflowY': 'auto'},
+            #style_cell={'textAlign': 'left', 'minWidth': '100px', 'width': '100px', 'maxWidth': '100px'},
             style_cell_conditional=[
                 {
                     'if': {'column_id': c},
                     'textAlign': 'right'
                 } for c in ['Price', 'Sales']
-            ]
+            ] + [
+               {
+                    'if': {'column_id': 'id'},
+                    'display': 'None',
+               }
+            ],
+            style_header_conditional=[
+                {'if': {'column_id': 'id',},
+                    'display': 'None',}
+            ],
 
         ),
     ]
