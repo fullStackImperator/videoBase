@@ -38,7 +38,7 @@ app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, exte
 app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-VALID_USERNAME_PASSWORD_PAIRS = {'5_star_coaching': 'good2great'}
+VALID_USERNAME_PASSWORD_PAIRS = {'Partizan': 'good2great'}
 
 # Authentication
 auth = dash_auth.BasicAuth(
@@ -250,7 +250,7 @@ def populate_datatable(n_intervals):
             page_current= 0,
             page_size= 10,
             # page_action='none',  # render all of the data at once. No paging.
-            style_table={'height': '350px', 'overflowY': 'auto'},
+            style_table={'height': '420px', 'overflowY': 'auto'},
             #style_cell={'textAlign': 'left', 'minWidth': '100px', 'width': '100px', 'maxWidth': '100px'},
             style_cell_conditional=[
                 {
