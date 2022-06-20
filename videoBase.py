@@ -38,7 +38,7 @@ app = dash.Dash(__name__, server=server, suppress_callback_exceptions=True, exte
 app.server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-VALID_USERNAME_PASSWORD_PAIRS = {'Partizan': 'good2great'}
+VALID_USERNAME_PASSWORD_PAIRS = {'kkp': 'good2great'}
 
 # Authentication
 auth = dash_auth.BasicAuth(
@@ -52,7 +52,8 @@ auth = dash_auth.BasicAuth(
 # app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:Stanford@localhost/videoBase"
 
 # for your live Heroku PostgreSQL database
-app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://aqneikqjreopov:85d086eef04810140fedd88750eac607649e66f893e54b476e72cfe2f81ec3e1@ec2-54-228-250-82.eu-west-1.compute.amazonaws.com:5432/daeicqg112rv3p"
+# app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://aqneikqjreopov:85d086eef04810140fedd88750eac607649e66f893e54b476e72cfe2f81ec3e1@ec2-54-228-250-82.eu-west-1.compute.amazonaws.com:5432/daeicqg112rv3p"
+app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ydveffetmxllfn:2dd09830d919ce3d0f8e1f1161d8a92411397b23897b7ee5c8de91dc870ffbb8@ec2-34-241-212-219.eu-west-1.compute.amazonaws.com:5432/d48t8jfo0ami30"
 
 db = SQLAlchemy(app.server)
 
